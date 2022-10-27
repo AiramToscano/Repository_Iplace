@@ -1,4 +1,6 @@
 // src/server.js
-const app = require('./app');
+const app = require('./api');
 
-app.listen(3001, () => console.log('server running on port 3001'));
+const port = process.env.API_PORT || 3000;
+
+app.listen(port, () => console.log('server running on port 3001'));
