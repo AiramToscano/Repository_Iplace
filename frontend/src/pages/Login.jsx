@@ -6,7 +6,6 @@ function Login() {
   const MIN_LENGTH_PASSWORD = 6;
   const regex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
   const navigate = useNavigate();
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
@@ -19,10 +18,9 @@ function Login() {
   async function handleSubmit(event) {
     event.preventDefault();
     const userLogin = await apiLogin(email, password);
-    console.log(userLogin);
     if (userLogin) {
       setError(false);
-      saveStorage(userLogin);
+      window.localStorage.setItem('user', JSON.stringify(userLogin.name));
       navigate('/');
     }
     setError(true);

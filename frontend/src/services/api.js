@@ -5,7 +5,6 @@ const apiLogin = async (email, password) => {
     const response = await axios.post('http://localhost:3004/login', { email, password });
     return response.data;
   } catch (err) {
-    console.log(err);
     return false;
   }
 };

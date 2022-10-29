@@ -1,37 +1,59 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { getStorage, clearStorage } from '../services/storage';
 
 function Navbar() {
   const navigate = useNavigate();
+  const [noLogin, setnoLogin] = useState(false);
+  const [nameLogin, setnameLogin] = useState('');
+
+  const nameUSer = () => {
+    const userId = window.localStorage.getItem('user');
+    if (userId) {
+      setnoLogin(true);
+      setnameLogin(userId);
+    }
+  };
+
+  function handleLogout() {
+    console.log('aqui');
+    localStorage.removeItem('user');
+    navigate('/login');
+  }
+
+  useEffect(() => {
+    nameUSer();
+  }, []);
 
   return (
     <section>
-      <button
-        onClick={ () => navigate('/login') }
-        type="button"
-      >
-        Login
-      </button>
-      <button
-        onClick={ () => navigate('/cadastro') }
-        type="button"
-      >
-        Criar Conta
-      </button>
-      {/* <button
-        data-testid="customer_products__element-navbar-user-full-name"
-        type="button"
-      >
-        { userName }
-      </button>
+      {!noLogin && (
+        <button
+          onClick={ () => navigate('/login') }
+          type="button"
+        >
+          Login
+        </button>)}
+      {noLogin && (
+        <p>
+          Bem vindo
+          {' '}
+          {nameLogin.replace('"', ' ').replace('"', '')}
+        </p>)}
+      {!noLogin && (
+        <button
+          onClick={ () => navigate('/cadastro') }
+          type="button"
+        >
+          Criar Conta
+        </button>
+      )}
       <button
         data-testid="customer_products__element-navbar-link-logout"
         type="button"
-        onClick={ handleLogout }
+        onClick={ () => handleLogout() }
       >
         Logout
-      </button> */}
+      </button>
     </section>
   );
 }
