@@ -4,9 +4,9 @@ module.exports = {
 'users',
       [{
         id: 1,
-        name: 'App Admin',
-        email: 'adm@app.com',
-        password: 'a4c86edecc5aee06eff8fdeda69e0d04',
+        name: 'Airam Toscano',
+        email: 'airam@adm.com',
+        password: 'c7f9750f3086ee495aa25e51dad3f338',
       }],
 
 {
