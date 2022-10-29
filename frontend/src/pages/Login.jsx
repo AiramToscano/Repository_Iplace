@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import API from '../services/api';
+import { apiLogin } from '../services/api';
 
 function Login() {
   const MIN_LENGTH_PASSWORD = 6;
@@ -14,12 +14,12 @@ function Login() {
   function loginClick(event) {
     prop.enviaEmail(email);
     event.preventDefault();
-    navigate('/');
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const userLogin = await API.apiLogin(email, password);
+    const userLogin = await apiLogin(email, password);
+    console.log(userLogin);
     if (userLogin) {
       setError(false);
       saveStorage(userLogin);

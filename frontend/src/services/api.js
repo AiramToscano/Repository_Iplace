@@ -1,18 +1,16 @@
 import axios from 'axios';
 
-const api = axios.create({
-  baseURL: 'http://localhost:3001',
-});
-
 const apiLogin = async (email, password) => {
   try {
-    const response = await api.post('/login', { email, password });
+    const response = await axios.post('http://localhost:3004/login', { email, password });
     return response.data;
   } catch (err) {
+    console.log(err);
     return false;
   }
 };
 
-export default {
+export {
+  // eslint-disable-next-line import/prefer-default-export
   apiLogin,
 };
