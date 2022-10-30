@@ -27,9 +27,29 @@ const apiGetAllproducts = async () => {
   }
 };
 
+const apiFilterProductsByName = async (name) => {
+  try {
+    const response = await axios.post('http://localhost:3004/', { name });
+    return response.data;
+  } catch (err) {
+    return false;
+  }
+};
+
+const apiFilterProductsByNameOrPrice = async (value) => {
+  try {
+    const response = await axios.post('http://localhost:3004/pricesorname', { query: value });
+    return response.data;
+  } catch (err) {
+    return false;
+  }
+};
+
 export {
   // eslint-disable-next-line import/prefer-default-export
   apiLogin,
   apiRegister,
   apiGetAllproducts,
+  apiFilterProductsByName,
+  apiFilterProductsByNameOrPrice,
 };

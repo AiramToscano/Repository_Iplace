@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { apiGetAllproducts } from '../services/api';
+import { useCart } from '../contexts/useCards';
 import Forms from './Forms';
 
 function Products() {
-//   const navigate = useNavigate();
-  const [products, setProducts] = useState([]);
+  const { products, setProducts } = useCart();
+  //   const navigate = useNavigate();
 
   const getProducts = async () => {
     const getProductsAll = await apiGetAllproducts();

@@ -18,6 +18,7 @@ const getAllProducts = async () => {
   };
 
   const getProductByPriceOrName = async (query) => {
+    const foundProducts = await Products.findAll();
     if (query === 'price') {
       const foundProductsPrice = await Products.findAll({
         order: [
@@ -34,6 +35,7 @@ const getAllProducts = async () => {
       });
       return foundProductsPrice;
     }
+    return foundProducts;
   };
 
 module.exports = { getAllProducts, getProductsByname, getProductByPriceOrName };

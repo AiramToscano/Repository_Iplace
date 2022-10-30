@@ -1,23 +1,36 @@
 import React from 'react';
+import { useCart } from '../contexts/useCards';
+import { apiFilterProductsByName, apiFilterProductsByNameOrPrice } from '../services/api';
 
 import '../index.css';
 
 function Forms() {
+  const { setProducts, filterName,
+    setfilterName, filterNameOrPrice, setfilterNameOrPrice } = useCart();
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const api = await apiFilterProductsByName(filterName);
+    setProducts(api);
+  }
+  async function handleSubmitFilter(event) {
+    event.preventDefault();
+    const api = await apiFilterProductsByNameOrPrice(filterNameOrPrice);
+    setProducts(api);
+  }
   return (
     <div className="inline-bloc">
       <header className="flex">
         <form className="m-5">
           <input
-            // onChange={ (e) => filterName(e.target.value) }
-            name="filterByName"
+            onChange={ (e) => setfilterName(e.target.value) }
+            name="filterName"
             placeholder="Digite o nome do produto"
-            id="teste"
-            // value={ filterByName }
-            data-testid="name-filter"
+            value={ filterName }
           />
           <select
-            onChange={ (e) => filterComp(e.target.value) }
-            // value={ filterByComp }
+            onChange={ (e) => setfilterNameOrPrice(e.target.value) }
+            value={ filterNameOrPrice }
             className="text-black m-5"
             name="filterByComp"
           >
@@ -28,12 +41,14 @@ function Forms() {
         </form>
       </header>
       <button
-        type="button"
+        type="submit"
+        onClick={ handleSubmit }
       >
         Pesquisar
       </button>
       <button
-        type="button"
+        type="submit"
+        onClick={ handleSubmitFilter }
       >
         Filtrar
       </button>
