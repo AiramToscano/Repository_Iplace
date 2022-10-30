@@ -18,8 +18,18 @@ const apiRegister = async (name, email, password) => {
   }
 };
 
+const apiGetAllproducts = async () => {
+  try {
+    const response = await axios.get('http://localhost:3004/');
+    return response.data;
+  } catch (err) {
+    return false;
+  }
+};
+
 export {
   // eslint-disable-next-line import/prefer-default-export
   apiLogin,
   apiRegister,
+  apiGetAllproducts,
 };

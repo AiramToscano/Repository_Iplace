@@ -1,12 +1,12 @@
 import React from 'react';
-
+import Products from '../components/Products';
 import Navbar from '../components/NavBar';
 
 function Main() {
   return (
     <div>
       <Navbar />
-      <h1> olá site</h1>
+      <Products />
     </div>
   );
 }
