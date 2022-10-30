@@ -1,36 +1,40 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { apiLogin } from '../services/api';
+import { apiRegister } from '../services/api';
 
-function Login() {
+function Register() {
+  const STATUS_CREATED = 201;
   const MIN_LENGTH_PASSWORD = 6;
+  const MAX_LENGTH_NAME = 12;
   const regex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
   const navigate = useNavigate();
+
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
 
-  function loginClick(event) {
-    prop.enviaEmail(email);
-    event.preventDefault();
-  }
-
   async function handleSubmit(event) {
     event.preventDefault();
-    const userLogin = await apiLogin(email, password);
-    if (userLogin) {
+    const userRegister = await apiRegister(name, email, password);
+    console.log(userRegister);
+    if (userRegister === STATUS_CREATED) {
       setError(false);
-      window.localStorage.setItem('user', JSON.stringify(userLogin.name));
-      navigate('/');
+      navigate('/login');
     }
     setError(true);
   }
 
   return (
-    <form data-testid="container" onSubmit={ loginClick }>
+    <form id="container">
       <div className="inputs">
         <input
-          data-testid="common_login__input-email"
+          type="name"
+          value={ name }
+          onChange={ (event) => setName(event.target.value) }
+        />
+
+        <input
           type="email"
           value={ email }
           onChange={ (event) => setEmail(event.target.value) }
@@ -46,16 +50,18 @@ function Login() {
       <div className="btn">
         <button
           type="submit"
-          disabled={ password.length < MIN_LENGTH_PASSWORD || !email.match(regex) }
+          disabled={ password.length < MIN_LENGTH_PASSWORD
+             || !email.match(regex)
+              || name.length < MAX_LENGTH_NAME }
           onClick={ handleSubmit }
         >
-          LOGIN
+          CADASTRAR
         </button>
       </div>
       {error && (
         <div className="error-message">
           <p>
-            Não foi possível fazer login.
+            Não foi possível fazer Register.
           </p>
         </div>
       )}
@@ -63,4 +69,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;

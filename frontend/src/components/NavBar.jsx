@@ -15,7 +15,6 @@ function Navbar() {
   };
 
   function handleLogout() {
-    console.log('aqui');
     localStorage.removeItem('user');
     navigate('/login');
   }
@@ -41,7 +40,7 @@ function Navbar() {
         </p>)}
       {!noLogin && (
         <button
-          onClick={ () => navigate('/cadastro') }
+          onClick={ () => navigate('/register') }
           type="button"
         >
           Criar Conta

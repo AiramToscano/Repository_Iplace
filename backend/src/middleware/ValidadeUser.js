@@ -12,4 +12,11 @@ const dataValidate = async (req, res, next) => {
     next();
   };
 
-module.exports = { dataValidate };
+  const createValidation = async (req, res, next) => {
+    const { email } = req.body;
+    const foundUser = await LoginService.FindUser(email);
+    if (foundUser) res.status(409).json({ message: foundUser });
+    next();
+  };
+
+module.exports = { dataValidate, createValidation };
