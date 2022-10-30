@@ -6,8 +6,8 @@ const Login = async ({ email, password }) => {
     const pwHash = md5(password);
     const user = await Users.findOne({ where: { email, password: pwHash } });
     const token = generateJWT(user);
-    const { name } = user;
-    return { name, email: user.email, token };
+    const { name, id } = user;
+    return { id, name, email: user.email, token };
   };
 
   const FindUser = async (email) => {

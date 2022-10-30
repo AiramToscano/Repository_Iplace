@@ -10,7 +10,8 @@ function Navbar() {
     const userId = window.localStorage.getItem('user');
     if (userId) {
       setnoLogin(true);
-      setnameLogin(userId);
+      const pessoaObj = JSON.parse(userId);
+      setnameLogin(pessoaObj.nome);
     }
   };
 
@@ -36,7 +37,7 @@ function Navbar() {
         <p>
           Bem vindo
           {' '}
-          {nameLogin.replace('"', ' ').replace('"', '')}
+          {nameLogin}
         </p>)}
       {!noLogin && (
         <button
