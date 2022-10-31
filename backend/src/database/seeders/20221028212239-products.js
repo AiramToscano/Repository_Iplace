@@ -12,7 +12,7 @@ module.exports = {
         },
         {
           id: 2,
-          name: 'Iphone12',
+          name: 'Iphone 12',
           price: 2445,
           description: 'Tela Super Retina XDR de 6,1 polegadas Ceramic Shield. Mais resistente do que qualquer vidro de smartphone.',
           url_image: 'http://localhost:3001/images/iPhone12.jpg',

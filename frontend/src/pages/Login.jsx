@@ -18,9 +18,10 @@ function Login() {
   async function handleSubmit(event) {
     event.preventDefault();
     const userLogin = await apiLogin(email, password);
+    const pessoa = { nome: userLogin.name, id: userLogin.id };
     if (userLogin) {
       setError(false);
-      window.localStorage.setItem('user', JSON.stringify(userLogin.name));
+      window.localStorage.setItem('user', JSON.stringify(pessoa));
       navigate('/');
     }
     setError(true);
