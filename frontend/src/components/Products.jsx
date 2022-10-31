@@ -23,14 +23,22 @@ function Products() {
     setdetails(name);
   }
 
-  async function handleSubmitAssinar(event) {
-    event.preventDefault();
+  async function handleSubmitAssinar(e) {
     const userId = window.localStorage.getItem('user');
+    // const pessoaObj = JSON.parse(userId);
     if (!userId) {
       navigate('/login');
     }
     if (userId) {
-      console.log('aqui');
+      const obj = {
+        id: e.id,
+        name: e.name,
+        price: e.price,
+        description: e.description,
+        url: e.urlImage,
+      };
+      window.localStorage.setItem('product', JSON.stringify(obj));
+      navigate('/checkout');
     }
   }
 
@@ -55,8 +63,8 @@ function Products() {
           </button>
           {e.description === details ? details : null}
           <button
-            type="submit"
-            onClick={ handleSubmitAssinar }
+            type="button"
+            onClick={ () => handleSubmitAssinar(e) }
           >
             Assinar
           </button>

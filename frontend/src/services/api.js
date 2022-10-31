@@ -45,6 +45,15 @@ const apiFilterProductsByNameOrPrice = async (value) => {
   }
 };
 
+const createUserProducts = async (userId, productId) => {
+  try {
+    const response = await axios.post('http://localhost:3004/userproducts', { userId, productId });
+    return response.data;
+  } catch (err) {
+    return false;
+  }
+};
+
 export {
   // eslint-disable-next-line import/prefer-default-export
   apiLogin,
@@ -52,4 +61,5 @@ export {
   apiGetAllproducts,
   apiFilterProductsByName,
   apiFilterProductsByNameOrPrice,
+  createUserProducts,
 };

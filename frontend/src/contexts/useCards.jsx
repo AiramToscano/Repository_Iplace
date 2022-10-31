@@ -10,19 +10,24 @@ function useCart() {
     filterNameOrPrice,
     setfilterName,
     setfilterNameOrPrice,
+    product,
+    setProduct,
   } = useContext(CartContext);
   return ({ products,
     setProducts,
     filterName,
     setfilterName,
     setfilterNameOrPrice,
-    filterNameOrPrice });
+    filterNameOrPrice,
+    product,
+    setProduct });
 }
 
 function CartProvider(prop) {
   const { children } = prop;
   const [products, setProducts] = useState([]);
   const [filterName, setfilterName] = useState('');
+  const [product, setProduct] = useState('');
   const [filterNameOrPrice, setfilterNameOrPrice] = useState('');
   const value = useMemo(
     () => ({
@@ -32,8 +37,10 @@ function CartProvider(prop) {
       setfilterName,
       filterNameOrPrice,
       setfilterNameOrPrice,
+      product,
+      setProduct,
     }),
-    [products, filterName, filterNameOrPrice],
+    [products, filterName, filterNameOrPrice, product],
   );
   // useEffect(()=>{
   //   setCart(prev => []);

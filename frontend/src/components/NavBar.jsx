@@ -54,6 +54,14 @@ function Navbar() {
       >
         Logout
       </button>
+      {noLogin && (
+        <button
+          onClick={ () => navigate('/profile') }
+          type="button"
+        >
+          Meu Perfil
+        </button>
+      )}
     </section>
   );
 }
